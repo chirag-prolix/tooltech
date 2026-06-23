@@ -1,0 +1,244 @@
+[
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.902511",
+  "module": "Tooltech Industries",
+  "name": "Rejection Analysis",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    qi.name AS \"Inspection:Link/Quality Inspection:150\",\n    qi.reference_name AS \"Reference:Data:150\",\n    qi.custom_process_rejected_in AS \"Process Caused:Link/Operation:150\",\n    qi.custom_process_identified_in AS \"Process Found:Link/Operation:150\",\n    qi.custom_issue_description AS \"Issue Description:Small Text:200\",\n    qi.custom_disposition AS \"Disposition:Data:120\",\n    qi.custom_deviation_action AS \"Deviation Action:Small Text:200\",\n    qi.custom_responsible_person AS \"Responsible:Link/Employee:150\"\nFROM \n    `tabQuality Inspection` qi\nWHERE \n    qi.status = \"Rejected\" OR qi.custom_disposition IS NOT NULL\nORDER BY \n    qi.creation DESC\n",
+  "ref_doctype": "Quality Inspection",
+  "reference_report": null,
+  "report_name": "Rejection Analysis",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Quality Inspector"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Production Incharge"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.911781",
+  "module": "Tooltech Industries",
+  "name": "Workers Efficiency Report",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    jc.name AS \"Job Card:Link/Job Card:120\",\n    jc.workstation AS \"Workstation:Link/Workstation:120\",\n    jc.employee AS \"Employee:Link/Employee:150\",\n    jc.custom_shift AS \"Shift:Data:80\",\n    jc.custom_standard_cycle_time AS \"Std Cycle Time:Float:120\",\n    jc.custom_total_downtime AS \"Total Downtime:Float:120\",\n    jc.custom_total_working_time AS \"Total Working Time:Float:150\",\n    jc.custom_machine_utilization_pct AS \"Machine Util %:Percent:120\",\n    jc.custom_operator_efficiency_pct AS \"Operator Eff %:Percent:120\"\nFROM \n    `tabJob Card` jc\nORDER BY \n    jc.creation DESC\n",
+  "ref_doctype": "Job Card",
+  "reference_report": null,
+  "report_name": "Workers Efficiency Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Production Incharge"
+   },
+   {
+    "role": "Machine Operator"
+   },
+   {
+    "role": "Production Head"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.921382",
+  "module": "Tooltech Industries",
+  "name": "Raw Material Yield Report",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    wo.name AS \"Work Order:Link/Work Order:120\",\n    wo.production_item AS \"Item:Link/Item:120\",\n    wo.custom_rm_grade AS \"RM Grade:Data:100\",\n    wo.custom_total_weight AS \"Total Weight (Kg):Float:120\",\n    wo.custom_scrap_weight AS \"Scrap Weight (Kg):Float:120\",\n    wo.custom_rm_yield_pct AS \"RM Yield %:Percent:100\"\nFROM \n    `tabWork Order` wo\nORDER BY \n    wo.creation DESC\n",
+  "ref_doctype": "Work Order",
+  "reference_report": null,
+  "report_name": "Raw Material Yield Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Production Incharge"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Store Keeper"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.939604",
+  "module": "Tooltech Industries",
+  "name": "Daily Production vs Plan",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    wo.name AS \"Work Order:Link/Work Order:120\",\n    wo.production_item AS \"Item:Link/Item:120\",\n    wo.custom_daily_plan AS \"Daily Plan Qty:Int:120\",\n    wo.produced_qty AS \"Actual Produced Qty:Float:150\",\n    (wo.produced_qty - wo.custom_daily_plan) AS \"Variance:Float:100\"\nFROM \n    `tabWork Order` wo\nORDER BY \n    wo.creation DESC\n",
+  "ref_doctype": "Work Order",
+  "reference_report": null,
+  "report_name": "Daily Production vs Plan",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Production Incharge"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Store Keeper"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.948603",
+  "module": "Tooltech Industries",
+  "name": "Rejection Pareto Chart",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    qi.custom_issue_description AS \"Issue:Data:200\",\n    COUNT(qi.name) AS \"Count:Int:100\"\nFROM \n    `tabQuality Inspection` qi\nWHERE \n    qi.custom_issue_description IS NOT NULL\nGROUP BY \n    qi.custom_issue_description\nORDER BY \n    Count DESC\n",
+  "ref_doctype": "Quality Inspection",
+  "reference_report": null,
+  "report_name": "Rejection Pareto Chart",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Quality Inspector"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Production Incharge"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.869176",
+  "module": "Tooltech Industries",
+  "name": "Production Monitoring Dashboard",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    wo.name AS \"Work Order:Link/Work Order:120\",\n    wo.production_item AS \"Item:Link/Item:120\",\n    wo.qty AS \"Planned Qty:Float:100\",\n    wo.produced_qty AS \"Produced Qty:Float:100\",\n    wo.custom_rm_heat_no AS \"RM Heat No:Data:120\",\n    wo.custom_rm_grade AS \"RM Grade:Data:100\",\n    wo.status AS \"WO Status:Data:100\",\n    wo.production_plan AS \"Production Plan:Link/Production Plan:120\",\n    wo.sales_order AS \"Sales Order:Link/Sales Order:120\"\nFROM \n    `tabWork Order` wo\nORDER BY \n    wo.creation DESC\n",
+  "ref_doctype": "Work Order",
+  "reference_report": null,
+  "report_name": "Production Monitoring Dashboard",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Production Incharge"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Store Keeper"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-16 16:17:35.930735",
+  "module": "Tooltech Industries",
+  "name": "Outsourcing Lead Time Report",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    dn.name AS \"DC No:Link/Delivery Note:150\",\n    dn.custom_dc_type AS \"DC Type:Data:100\",\n    dn.custom_dc_process AS \"Process:Data:120\",\n    dn.customer AS \"Customer:Link/Customer:120\",\n    dn.posting_date AS \"Date:Date:100\",\n    dni.item_code AS \"Item:Link/Item:120\",\n    dni.qty AS \"Qty:Float:100\"\nFROM \n    `tabDelivery Note` dn\nLEFT JOIN\n    `tabDelivery Note Item` dni ON dni.parent = dn.name\nWHERE\n    dn.custom_dc_type IS NOT NULL\nORDER BY \n    dn.creation DESC\n",
+  "ref_doctype": "Delivery Note",
+  "reference_report": null,
+  "report_name": "Outsourcing Lead Time Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Store Keeper"
+   },
+   {
+    "role": "Production Head"
+   }
+  ],
+  "timeout": 0
+ }
+]

@@ -1,0 +1,181 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow",
+  "document_type": "Quality Inspection",
+  "enable_action_confirmation": 0,
+  "is_active": 1,
+  "modified": "2026-06-15 17:47:21.617867",
+  "name": "Quality Deviation Workflow",
+  "override_status": 0,
+  "send_email_alert": 0,
+  "states": [
+   {
+    "allow_edit": "Quality Inspector",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 1,
+    "state": "Inspection Failed",
+    "update_field": "status",
+    "update_value": "Rejected",
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Production Head",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 1,
+    "state": "Reject",
+    "update_field": "status",
+    "update_value": "Rejected",
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Production Head",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 1,
+    "state": "Rework",
+    "update_field": "status",
+    "update_value": "Rejected",
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Production Incharge",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 1,
+    "state": "Deviation Request",
+    "update_field": "status",
+    "update_value": "Rejected",
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Production Head",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 1,
+    "state": "Deviation Approved",
+    "update_field": "status",
+    "update_value": "Accepted",
+    "workflow_builder_id": null
+   },
+   {
+    "allow_edit": "Quality Inspector",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "evaluate_as_expression": 0,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "send_email": 1,
+    "state": "Re Inspect",
+    "update_field": "status",
+    "update_value": "Rejected",
+    "workflow_builder_id": null
+   }
+  ],
+  "transitions": [
+   {
+    "action": "Scrap",
+    "allow_self_approval": 1,
+    "allowed": "Quality Inspector",
+    "condition": null,
+    "next_state": "Reject",
+    "send_email_to_creator": 0,
+    "state": "Inspection Failed",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Send for Rework",
+    "allow_self_approval": 1,
+    "allowed": "Quality Inspector",
+    "condition": null,
+    "next_state": "Rework",
+    "send_email_to_creator": 0,
+    "state": "Inspection Failed",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Request Deviation",
+    "allow_self_approval": 1,
+    "allowed": "Production Incharge",
+    "condition": null,
+    "next_state": "Deviation Request",
+    "send_email_to_creator": 0,
+    "state": "Inspection Failed",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Approve Deviation",
+    "allow_self_approval": 1,
+    "allowed": "Production Head",
+    "condition": null,
+    "next_state": "Deviation Approved",
+    "send_email_to_creator": 0,
+    "state": "Deviation Request",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Re Inspect",
+    "allow_self_approval": 1,
+    "allowed": "Quality Inspector",
+    "condition": null,
+    "next_state": "Re Inspect",
+    "send_email_to_creator": 0,
+    "state": "Rework",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Scrap",
+    "allow_self_approval": 1,
+    "allowed": "Quality Inspector",
+    "condition": null,
+    "next_state": "Reject",
+    "send_email_to_creator": 0,
+    "state": "Re Inspect",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   },
+   {
+    "action": "Request Deviation",
+    "allow_self_approval": 1,
+    "allowed": "Production Incharge",
+    "condition": null,
+    "next_state": "Deviation Request",
+    "send_email_to_creator": 0,
+    "state": "Re Inspect",
+    "transition_tasks": null,
+    "workflow_builder_id": null
+   }
+  ],
+  "workflow_data": null,
+  "workflow_name": "Quality Deviation Workflow",
+  "workflow_state_field": "workflow_state"
+ }
+]

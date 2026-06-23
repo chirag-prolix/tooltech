@@ -238,6 +238,18 @@ app_license = "mit"
 # 	"tooltech.auth.validate"
 # ]
 
+fixtures = [
+	{"dt": "Custom Field"},
+	{"dt": "Property Setter"},
+	{"dt": "Client Script"},
+	{"dt": "Server Script"},
+	{"dt": "Print Format", "filters": [["custom_format", "=", 1]]},
+	{"dt": "Report", "filters": [["is_standard", "=", "No"]]},
+	{"dt": "Workflow"},
+	{"dt": "Notification", "filters": [["is_standard", "=", 0]]},
+	{"dt": "Custom DocPerm"},
+]
+
 # Automatically update python controller files with type annotations for this app.
 export_python_type_annotations = True
 
@@ -252,4 +264,3 @@ require_type_annotated_api_methods = True
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

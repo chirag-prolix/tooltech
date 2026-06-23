@@ -1,0 +1,24 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Workspace",
+  "enabled": 1,
+  "modified": "2026-06-13 17:24:32.697816",
+  "module": null,
+  "name": "Global Sidebar Patch Workspace",
+  "script": "// Global Sidebar & App Switcher Patches\n(function() {\n    if (typeof frappe !== 'undefined') {\n        if (frappe.ui && frappe.ui.Sidebar && !frappe.ui.Sidebar.prototype._patched_setup) {\n            const original_setup = frappe.ui.Sidebar.prototype.setup;\n            frappe.ui.Sidebar.prototype.setup = function(workspace_title) {\n                if (!workspace_title) {\n                    workspace_title = \"\";\n                }\n                original_setup.call(this, workspace_title);\n            };\n            frappe.ui.Sidebar.prototype._patched_setup = true;\n        }\n        if (frappe.ui && frappe.ui.SidebarHeader && !frappe.ui.SidebarHeader.prototype._patched_add_app_item) {\n            const original_add_app_item = frappe.ui.SidebarHeader.prototype.add_app_item;\n            frappe.ui.SidebarHeader.prototype.add_app_item = function(item) {\n                if (!item.icon && !item.icon_url) {\n                    item.icon = \"setting\";\n                }\n                original_add_app_item.call(this, item);\n            };\n            frappe.ui.SidebarHeader.prototype._patched_add_app_item = true;\n        }\n    }\n})();\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Error Log",
+  "enabled": 1,
+  "modified": "2026-06-13 17:24:32.842884",
+  "module": null,
+  "name": "Global Sidebar Patch Error Log",
+  "script": "// Global Sidebar & App Switcher Patches\n(function() {\n    if (typeof frappe !== 'undefined') {\n        if (frappe.ui && frappe.ui.Sidebar && !frappe.ui.Sidebar.prototype._patched_setup) {\n            const original_setup = frappe.ui.Sidebar.prototype.setup;\n            frappe.ui.Sidebar.prototype.setup = function(workspace_title) {\n                if (!workspace_title) {\n                    workspace_title = \"\";\n                }\n                original_setup.call(this, workspace_title);\n            };\n            frappe.ui.Sidebar.prototype._patched_setup = true;\n        }\n        if (frappe.ui && frappe.ui.SidebarHeader && !frappe.ui.SidebarHeader.prototype._patched_add_app_item) {\n            const original_add_app_item = frappe.ui.SidebarHeader.prototype.add_app_item;\n            frappe.ui.SidebarHeader.prototype.add_app_item = function(item) {\n                if (!item.icon && !item.icon_url) {\n                    item.icon = \"setting\";\n                }\n                original_add_app_item.call(this, item);\n            };\n            frappe.ui.SidebarHeader.prototype._patched_add_app_item = true;\n        }\n    }\n})();\n",
+  "view": "Form"
+ }
+]
