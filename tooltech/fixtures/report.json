@@ -15,7 +15,7 @@
   "module": "Tooltech Industries",
   "name": "Rejection Analysis",
   "prepared_report": 0,
-  "query": "\nSELECT \n    qi.name AS \"Inspection:Link/Quality Inspection:150\",\n    qi.reference_name AS \"Reference:Data:150\",\n    qi.custom_process_rejected_in AS \"Process Caused:Link/Operation:150\",\n    qi.custom_process_identified_in AS \"Process Found:Link/Operation:150\",\n    qi.custom_issue_description AS \"Issue Description:Small Text:200\",\n    qi.custom_disposition AS \"Disposition:Data:120\",\n    qi.custom_deviation_action AS \"Deviation Action:Small Text:200\",\n    qi.custom_responsible_person AS \"Responsible:Link/Employee:150\"\nFROM \n    `tabQuality Inspection` qi\nWHERE \n    qi.status = \"Rejected\" OR qi.custom_disposition IS NOT NULL\nORDER BY \n    qi.creation DESC\n",
+  "query": "\nSELECT \n    qi.name AS \"Inspection:Link/Quality Inspection:120\",\n    qi.reference_name AS \"Reference:Data:120\",\n    qi.item_code AS \"Item:Link/Item:120\",\n    qi.custom_batch_qty AS \"Batch Qty:Int:80\",\n    qi.custom_total_rejected_qty AS \"Rejected Qty:Int:80\",\n    qi.custom_accepted_qty AS \"Accepted Qty:Int:80\",\n    qi.custom_machine AS \"Machine:Link/Workstation:120\",\n    qi.custom_job_card AS \"Job Card:Link/Job Card:120\",\n    qi.custom_process_rejected_in AS \"Process Caused:Link/Operation:120\",\n    qi.custom_process_identified_in AS \"Process Found:Link/Operation:120\",\n    qi.custom_issue_description AS \"Issue Description:Small Text:200\",\n    qi.custom_disposition AS \"Disposition:Data:100\",\n    qi.custom_capa_status AS \"CAPA Status:Data:100\",\n    qi.inspection_date AS \"Date:Date:100\"\nFROM \n    `tabQuality Inspection` qi\nWHERE \n    qi.status = \"Rejected\" OR qi.custom_disposition IS NOT NULL\nORDER BY \n    qi.inspection_date DESC\n",
   "ref_doctype": "Quality Inspection",
   "reference_report": null,
   "report_name": "Rejection Analysis",
@@ -237,6 +237,76 @@
    },
    {
     "role": "Production Head"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-27 12:00:00.000000",
+  "module": "Tooltech Industries",
+  "name": "Rejection Reason Breakdown",
+  "prepared_report": 0,
+  "query": "\nSELECT \n    rr.reason_name AS \"Rejection Reason:Data:200\",\n    rr.reason_category AS \"Category:Data:120\",\n    SUM(rd.rejected_qty) AS \"Total Rejected:Int:100\",\n    COUNT(DISTINCT rd.parent) AS \"Inspections:Int:80\"\nFROM \n    `tabTooltech Rejection Detail` rd\nJOIN \n    `tabTooltech Rejection Reason` rr ON rr.name = rd.rejection_reason\nGROUP BY \n    rr.name\nORDER BY \n    SUM(rd.rejected_qty) DESC\n",
+  "ref_doctype": "Quality Inspection",
+  "reference_report": null,
+  "report_name": "Rejection Reason Breakdown",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Quality Inspector"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Production Incharge"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-27 12:00:00.000000",
+  "module": "Tooltech Industries",
+  "name": "CAPA Tracker",
+  "prepared_report": 0,
+  "query": "\nSELECT\n    qi.name AS \"Inspection:Link/Quality Inspection:120\",\n    qi.item_code AS \"Item:Link/Item:120\",\n    qi.custom_root_cause AS \"Root Cause:Small Text:200\",\n    qi.custom_corrective_action AS \"Corrective Action:Small Text:200\",\n    qi.custom_preventive_action AS \"Preventive Action:Small Text:200\",\n    qi.custom_capa_due_date AS \"Due Date:Date:100\",\n    qi.custom_capa_status AS \"Status:Data:100\",\n    qi.custom_responsible_person AS \"Responsible:Link/Employee:120\"\nFROM\n    `tabQuality Inspection` qi\nWHERE\n    qi.custom_capa_status IN (\"Open\", \"In Progress\")\nORDER BY\n    qi.custom_capa_due_date ASC\n",
+  "ref_doctype": "Quality Inspection",
+  "reference_report": null,
+  "report_name": "CAPA Tracker",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Quality Inspector"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Production Incharge"
    }
   ],
   "timeout": 0

@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "creation": "2026-06-27 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Child Table",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "rejection_reason",
+  "reason_category",
+  "rejected_qty",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "columns": 4,
+   "fieldname": "rejection_reason",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Rejection Reason",
+   "options": "Tooltech Rejection Reason",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "rejection_reason.reason_category",
+   "fieldname": "reason_category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Category",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "rejected_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Rejected Qty",
+   "reqd": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Remarks"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-06-27 00:00:00.000000",
+ "module": "Tooltech",
+ "name": "Tooltech Rejection Detail",
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

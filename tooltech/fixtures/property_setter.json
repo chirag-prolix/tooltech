@@ -1505,22 +1505,6 @@
  },
  {
   "default_value": null,
-  "doc_type": "Production Request Sheet",
-  "docstatus": 0,
-  "doctype": "Property Setter",
-  "doctype_or_field": "DocField",
-  "field_name": "barcode",
-  "is_system_generated": 1,
-  "modified": "2026-06-15 18:59:15.192885",
-  "module": null,
-  "name": "Production Request Sheet-barcode-hidden",
-  "property": "hidden",
-  "property_type": "Check",
-  "row_name": null,
-  "value": "0"
- },
- {
-  "default_value": null,
   "doc_type": "Purchase Receipt",
   "docstatus": 0,
   "doctype": "Property Setter",

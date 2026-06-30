@@ -132,34 +132,29 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Job Card": {
+		"before_submit": "tooltech.qc.validations.validate_qc_gate_on_job_card",
+	},
+	"Purchase Receipt": {
+		"before_submit": "tooltech.qc.validations.validate_qc_gate_on_purchase_receipt",
+	},
+	"Quality Inspection": {
+		"validate": "tooltech.qc.validations.calculate_rejection_totals",
+	},
+	"Tooltech Calibration Log": {
+		"on_submit": "tooltech.qc.calibration.update_asset_calibration_status",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"tooltech.tasks.all"
-# 	],
-# 	"daily": [
-# 		"tooltech.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"tooltech.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"tooltech.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"tooltech.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"tooltech.qc.calibration.check_overdue_calibrations",
+	],
+}
 
 # Testing
 # -------

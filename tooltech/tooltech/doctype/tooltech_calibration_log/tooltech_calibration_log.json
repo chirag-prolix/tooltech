@@ -1,0 +1,213 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-06-27 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "is_submittable": 1,
+ "field_order": [
+  "naming_series",
+  "asset",
+  "asset_name",
+  "column_break_top",
+  "instrument_type",
+  "instrument_status",
+  "calibration_section",
+  "calibration_date",
+  "next_calibration_date",
+  "calibration_frequency_days",
+  "column_break_cal",
+  "calibrated_by",
+  "calibration_standard",
+  "result",
+  "certificate_section",
+  "certificate",
+  "remarks_section",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "no_copy": 1,
+   "options": "CAL-.YYYY.-",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Asset (Instrument)",
+   "options": "Asset",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "asset.asset_name",
+   "fieldname": "asset_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Instrument Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_top",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "instrument_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Instrument Type",
+   "options": "\nGauge\nMicrometer\nCaliper\nDial Indicator\nHeight Gauge\nCMM\nHardness Tester\nSurface Roughness Tester\nOther"
+  },
+  {
+   "fieldname": "instrument_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Instrument Status",
+   "options": "Active\nDue for Calibration\nExpired\nScrapped",
+   "default": "Active"
+  },
+  {
+   "fieldname": "calibration_section",
+   "fieldtype": "Section Break",
+   "label": "Calibration Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "calibration_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Calibration Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "next_calibration_date",
+   "fieldtype": "Date",
+   "label": "Next Calibration Date"
+  },
+  {
+   "default": "365",
+   "fieldname": "calibration_frequency_days",
+   "fieldtype": "Int",
+   "label": "Frequency (Days)"
+  },
+  {
+   "fieldname": "column_break_cal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "calibrated_by",
+   "fieldtype": "Data",
+   "label": "Calibrated By"
+  },
+  {
+   "fieldname": "calibration_standard",
+   "fieldtype": "Data",
+   "label": "Reference Standard"
+  },
+  {
+   "fieldname": "result",
+   "fieldtype": "Select",
+   "label": "Result",
+   "options": "\nPass\nFail\nAdjusted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "certificate_section",
+   "fieldtype": "Section Break",
+   "label": "Certificate"
+  },
+  {
+   "fieldname": "certificate",
+   "fieldtype": "Attach",
+   "label": "Calibration Certificate"
+  },
+  {
+   "fieldname": "remarks_section",
+   "fieldtype": "Section Break",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Tooltech Calibration Log",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-27 00:00:00.000000",
+ "module": "Tooltech",
+ "name": "Tooltech Calibration Log",
+ "naming_rule": "By \"Naming Series\" field",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "cancel": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Quality Inspector",
+   "share": 1,
+   "submit": 1,
+   "cancel": 0,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Production Incharge"
+  },
+  {
+   "create": 1,
+   "delete": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Production Head",
+   "submit": 1,
+   "cancel": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {"color": "Orange", "title": "Draft"},
+  {"color": "Green", "title": "Submitted"},
+  {"color": "Red", "title": "Cancelled"}
+ ],
+ "title_field": "asset_name",
+ "track_changes": 1
+}
