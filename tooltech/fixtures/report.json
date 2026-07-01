@@ -240,5 +240,68 @@
    }
   ],
   "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "Today",
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 1,
+    "options": null,
+    "wildcard_filter": 0
+   },
+   {
+    "default": "Today",
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 1,
+    "options": null,
+    "wildcard_filter": 0
+   },
+   {
+    "default": "All",
+    "fieldname": "disposition",
+    "fieldtype": "Select",
+    "label": "Disposition",
+    "mandatory": 0,
+    "options": "All\nReject\nRework\nDeviation",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Company Letterhead - Grey",
+  "modified": "2026-06-30 00:00:00",
+  "module": "Tooltech",
+  "name": "Parts Rejection Report",
+  "prepared_report": 0,
+  "query": "\nSELECT\n    CAST(ROW_NUMBER() OVER (ORDER BY COALESCE(qi.custom_rejection_date, qi.report_date) DESC, qi.creation DESC) AS CHAR) AS \"SL#:Data:60\",\n    qi.custom_prs_no AS \"PRS No:Data:120\",\n    qi.custom_order_code AS \"Order Code:Data:120\",\n    qi.item_name AS \"Description:Data:180\",\n    item.custom_drawing_number AS \"Drawing Number:Data:160\",\n    COALESCE(qi.custom_rejection_date, qi.report_date) AS \"Rejection Date:Date:120\",\n    qi.custom_process_rejected_in AS \"Rejected In:Link/Operation:140\",\n    qi.custom_process_identified_in AS \"Identified In:Link/Operation:140\",\n    qi.custom_issue_description AS \"Issue:Small Text:220\",\n    IFNULL(qi.custom_rejected_qty, 0) AS \"Qty:Float:90\",\n    qi.custom_disposition AS \"Remarks:Data:140\",\n    qi.custom_responsible_person AS \"Responsible:Link/Employee:150\"\nFROM\n    `tabQuality Inspection` qi\nLEFT JOIN\n    `tabItem` item ON item.name = qi.item_code\nWHERE\n    qi.docstatus = 1\n    AND (\n        qi.status = 'Rejected'\n        OR IFNULL(qi.custom_rejected_qty, 0) > 0\n        OR IFNULL(qi.custom_disposition, '') != ''\n    )\n    AND COALESCE(qi.custom_rejection_date, qi.report_date) >= %(from_date)s\n    AND COALESCE(qi.custom_rejection_date, qi.report_date) <= %(to_date)s\n    AND (\n        %(disposition)s = 'All'\n        OR qi.custom_disposition = %(disposition)s\n    )\nORDER BY\n    COALESCE(qi.custom_rejection_date, qi.report_date) DESC,\n    qi.creation DESC\n",
+  "ref_doctype": "Quality Inspection",
+  "reference_report": null,
+  "report_name": "Parts Rejection Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "Quality Inspector"
+   },
+   {
+    "role": "Production Head"
+   },
+   {
+    "role": "Production Incharge"
+   }
+  ],
+  "timeout": 0
  }
 ]
